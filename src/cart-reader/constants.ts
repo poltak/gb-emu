@@ -1,4 +1,4 @@
-export const CARTRIDGE_TYPES = {
+export const CARTRIDGE_TYPES: { [key: number]: string } = {
     0x00: 'ROM ONLY',
     0x01: 'MBC1',
     0x02: 'MBC1+RAM',
@@ -29,7 +29,7 @@ export const CARTRIDGE_TYPES = {
     0xff: 'HuC1+RAM+BATTERY',
 } as const
 
-export const NEW_LICENSEE_CODES = {
+export const NEW_LICENSEE_CODES: { [key: number]: string } = {
     0x00: 'None',
     0x01: 'Nintendo R&D1',
     0x08: 'Capcom',
@@ -93,7 +93,9 @@ export const NEW_LICENSEE_CODES = {
     0xa4: 'Konami (Yu-Gi-Oh!)',
 } as const
 
-export const OLD_LICENSEE_CODES = {
+export const NEW_LICENSEE_CODES_CHECK = 0x33
+
+export const OLD_LICENSEE_CODES: { [key: number]: string } = {
     0x00: 'None',
     0x01: 'Nintendo',
     0x08: 'Capcom',
@@ -243,29 +245,32 @@ export const OLD_LICENSEE_CODES = {
     0xff: 'LJN',
 } as const
 
-export const ROM_SIZES = {
-    0x00: { banks: 2, size: '32 KiB' }, // no banking
-    0x01: { banks: 4, size: '64 KiB' },
-    0x02: { banks: 8, size: '128 KiB' },
-    0x03: { banks: 16, size: '256 KiB' },
-    0x04: { banks: 32, size: '512 KiB' },
-    0x05: { banks: 64, size: '1 MiB' },
-    0x06: { banks: 128, size: '2 MiB' },
-    0x07: { banks: 256, size: '4 MiB' },
-    0x08: { banks: 512, size: '8 MiB' },
-    0x52: { banks: 72, size: '1.1 MiB' }, // Special case
-    0x53: { banks: 80, size: '1.2 MiB' }, // Special case
-    0x54: { banks: 96, size: '1.5 MiB' }, // Special case
+export const ROM_SIZES: { [key: number]: number } = {
+    0x00: 32768, // 32 KiB
+    0x01: 65536, // 64 KiB
+    0x02: 131072, // 128 KiB
+    0x03: 262144, // 256 KiB
+    0x04: 524288, // 512 KiB
+    0x05: 1048576, // 1 MiB
+    0x06: 2097152, // 2 MiB
+    0x07: 4194304, // 4 MiB
+    0x08: 8388608, // 8 MiB
+    0x52: 1179648, // 1.1 MiB
+    0x53: 1310720, // 1.2 MiB
+    0x54: 1572864, // 1.5 MiB
 } as const
 
-export const RAM_SIZES = {
-    0x00: { size: 'None', bytes: 0 },
-    0x01: { size: '2 KiB', bytes: 2048 }, // 1 bank
-    0x02: { size: '8 KiB', bytes: 8192 }, // 1 bank
-    0x03: { size: '32 KiB', bytes: 32768 }, // 4 banks
-    0x04: { size: '128 KiB', bytes: 131072 }, // 16 banks
-    0x05: { size: '64 KiB', bytes: 65536 }, // 8 banks
+export const RAM_SIZES: { [key: number]: number } = {
+    0x00: 0, // None
+    0x01: 2048, // 1 bank
+    0x02: 8192, // 1 bank
+    0x03: 32768, // 4 banks
+    0x04: 131072, // 16 banks
+    0x05: 65536, // 8 banks
 } as const
+
+export const ROM_BANK_SIZE = 16384
+export const RAM_BANK_SIZE = 8192
 
 // prettier-ignore
 export const NINTENDO_LOGO = [
