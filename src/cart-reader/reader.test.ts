@@ -18,6 +18,7 @@ Deno.test('read tetris', async () => {
         romSize: { bytes: 32 * 1024, banks: 2 },
         ramSize: { bytes: 0, banks: 0 },
         destination: 'Japan',
+        checksumMatches: true,
     })
 })
 
@@ -38,6 +39,7 @@ Deno.test('read zelda', async () => {
         romSize: { bytes: 512 * 1024, banks: 32 },
         ramSize: { bytes: 8 * 1024, banks: 1 },
         destination: 'Overseas',
+        checksumMatches: true,
     })
 })
 
@@ -57,6 +59,7 @@ Deno.test('read pokemon blue', async () => {
         romSize: { bytes: 1024 * 1024, banks: 64 },
         ramSize: { bytes: 32 * 1024, banks: 4 },
         destination: 'Overseas',
+        checksumMatches: true,
     })
 })
 
@@ -76,5 +79,6 @@ Deno.test('read pokemon crystal', async () => {
         romSize: { bytes: 2048 * 1024, banks: 128 },
         ramSize: { bytes: 32 * 1024, banks: 4 },
         destination: 'Overseas',
+        checksumMatches: true,
     })
 })

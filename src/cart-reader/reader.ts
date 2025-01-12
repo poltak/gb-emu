@@ -1,4 +1,5 @@
 import { asciiBytesToString } from '../lib/ascii-bytes-to-string.ts'
+import { calculateChecksum } from './checksum.ts'
 import { RAM_BANK_SIZE, RAM_SIZES, ROM_BANK_SIZE } from './constants.ts'
 import { ROM_SIZES } from './constants.ts'
 import {
@@ -25,6 +26,7 @@ export interface CartHeader {
     ramSize: RomSize
     destination: Destination
     title: string
+    checksumMatches: boolean
     maskRomVersionNumber: number
 }
 
@@ -115,11 +117,20 @@ export class CartDecoder {
         return this.data[0x014c]
     }
 
+    private readChecksum(): boolean {
+        let checksum = this.data[0x014d]
+        let calculatedChecksum = calculateChecksum(this.data)
+        // We only want the lower 8 bits of the checksum, as this is an 8-bit system
+        let maskedChecksum = calculatedChecksum & 0xff
+        return checksum === maskedChecksum
+    }
+
     readCartHeader(): CartHeader {
         return {
             maskRomVersionNumber: this.readMaskRomVersionNumber(),
             superGameBoySupport: this.readSuperGameBoySupport(),
             nintendoLogoExists: this.doesNintendoLogoExist(),
+            checksumMatches: this.readChecksum(),
             destination: this.readDestination(),
             colorMode: this.readColorMode(),
             cartType: this.readCartType(),
